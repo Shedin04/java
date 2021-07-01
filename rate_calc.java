@@ -3,111 +3,63 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args)
-    {
-        String first = "Подсчет";
-        String two = " среднего";
-        String third = " балла";
-        String all = first + two + third;
-        System.out.println(all + "\n" + "Введите оценки за предмет:");
-
-        int aks = 0, im = 0, lm = 0, okzi = 0, pro = 0, okzi_kr = 0, inft = 0, ptvms = 0, gas = 0;
-        boolean check = false;
+    public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        while (!check) { // !check это check == false
-            System.out.print("АКС: ");
-            aks = input.nextInt();
-            check = aks <= 100 && aks >= 0;
-            if (!check)
-                System.out.println("[Ошибка]");
-        }
-        check = false;
-        while (!check) {
-            System.out.print("ІМ: ");
-            im = input.nextInt();
-            check = im <= 100 && im >= 0;
-            if (!check)
-                System.out.println("[Ошибка]");
-        }
-        check = false;
-        while (!check) {
-            System.out.print("ЛМ: ");
-            lm = input.nextInt();
-            check = lm <= 100 && lm >= 0;
-            if (!check)
-                System.out.println("[Ошибка]");
-        }
-        check = false;
-        while (!check) {
-            System.out.print("ОКЗІ: ");
-            okzi = input.nextInt();
-            check = okzi <= 100 && okzi >= 0;
-            if (!check)
-                System.out.println("[Ошибка]");
-        }
-        check = false;
-        while (!check) {
-            System.out.print("ПРО: ");
-            pro = input.nextInt();
-            check = pro <= 100 && pro >= 0;
-            if (!check)
-                System.out.println("[Ошибка]");
-        }
-        check = false;
-        while (!check) {
-            System.out.print("ОКЗІ (кр): ");
-            okzi_kr = input.nextInt();
-            check = okzi_kr <= 100 && okzi_kr >= 0;
-            if (!check)
-                System.out.println("[Ошибка]");
-        }
-        check = false;
-        while (!check) {
-            System.out.print("ІнфТ: ");
-            inft = input.nextInt();
-            check = inft <= 100 && inft >= 0;
-            if (!check)
-                System.out.println("[Ошибка]");
-        }
-        check = false;
-        while (!check) {
-            System.out.print("Птмвс: ");
-            ptvms = input.nextInt();
-            check = ptvms <= 100 && ptvms >= 0;
-            if (!check)
-                System.out.println("[Ошибка]");
-        }
-        check = false;
-        while (!check) {
-            System.out.print("ГАС (def. 60): ");
-            gas = input.nextInt();
-            check = gas <= 100 && gas >= 60;
-            if (!check)
-                System.out.println("[Ошибка]");
+        Scanner text = new Scanner(System.in);
+
+        System.out.println("Расчет среднего балла");
+        System.out.print("- Введите к-во предметов: ");
+        int count = input.nextInt();
+        boolean check;
+
+        int[] sub_rate = new int[count];
+        int[] sub_cr = new int[count];
+        int[] sub_mult = new int[count];
+        String[] sub_name = new String[256];
+
+        System.out.println("Введите названия: ");
+        for (int i = 0; i < count; i++) {
+            System.out.print("Предмет [" + (i+1) + "] - ");
+            sub_name[i] = text.nextLine();
         }
 
-        System.out.print("Кредиты: по-ум. - '0'; ввести - '1': ");
-        int cr = input.nextInt();
-        int cr_aks, cr_im, cr_inft, cr_lm, cr_okzi, cr_ptmvs, cr_pro, cr_okzi_kr;
-        switch (cr) {
-            case 1:
-                System.out.println("Введите к-во кредитов:");
-                System.out.print("АКС: "); cr_aks = input.nextInt();
-                System.out.print("ІМ: "); cr_im = input.nextInt();
-                System.out.print("ЛМ: "); cr_lm = input.nextInt();
-                System.out.print("ОКЗІ: "); cr_okzi = input.nextInt();
-                System.out.print("ПРО: "); cr_pro = input.nextInt();
-                System.out.print("ОКЗІ (кр): "); cr_okzi_kr = input.nextInt();
-                System.out.print("ІнфТ: "); cr_inft = input.nextInt();
-                System.out.print("Птмвс: "); cr_ptmvs = input.nextInt();
-                break;
-            default:
-                cr_aks = 4; cr_im = 2; cr_inft = 4; cr_lm = 5; cr_okzi = 6; cr_ptmvs = 3; cr_pro = 4; cr_okzi_kr = 1;
+        System.out.println("Введите оценки и кредиты [Предмет - 100 3]: ");
+        for (int i = 0; i < count; i++) {
+            check = false;
+            while (!check) { // !check это check == false
+                System.out.print(sub_name[i] + " - ");
+                sub_rate[i] = input.nextInt();
+                sub_cr[i] = input.nextInt();
+                check = sub_rate[i] <= 100 && sub_rate[i] >= 0 && sub_cr[i] > 0;
+                if (!check)
+                    System.out.println("[Ошибка]");
+            }
         }
-        float count_cr = cr_aks + cr_im + cr_inft + cr_lm + cr_okzi + cr_ptmvs + cr_pro + cr_okzi_kr;
-        System.out.println("Всего кредитов:" + (int)count_cr);
-        float rate = ((aks * cr_aks) + (im * cr_im) + (inft * cr_inft) + (lm * cr_lm) + (okzi * cr_okzi) + (ptvms * cr_ptmvs) + (pro * cr_pro) + (okzi_kr * cr_okzi_kr)) / count_cr;
-        rate = (rate * 0.9f) + (0.1f * gas);
-        System.out.println("Средний балл: " + rate);
+            check = false;
+            int gas = 0;
+            System.out.print("Есть доп. баллы? [0-нет; 1-есть]: ");
+            int dop = input.nextInt();
+            switch (dop) {
+                case 1:
+                    while (!check) {
+                        System.out.print("Введите к-во доп. баллов [1-40]: ");
+                        gas = input.nextInt();
+                        check = gas <= 40 && gas > 0;
+                    }
+                    break;
+                default:
+            }
+        gas += 60;
+
+        float count_cr = 0;
+            float mult = 0;
+        for (int i = 0; i < count; i++)
+        {
+            sub_mult[i] = sub_rate[i]*sub_cr[i];
+            count_cr += sub_cr[i];
+            mult += sub_mult[i];
+        }
+        float result = (mult/count_cr) * 0.9f + (gas*0.1f);
+        System.out.print("Средняя оценка: " + result);
     }
 }
