@@ -2,10 +2,8 @@ package com.company; //что-то типа библиотек в си++
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Scanner text = new Scanner(System.in);
 
         System.out.println("Расчет среднего балла");
         System.out.print("- Введите к-во предметов: ");
@@ -18,10 +16,7 @@ public class Main {
         String[] sub_name = new String[256];
 
         System.out.println("Введите названия: ");
-        for (int i = 0; i < count; i++) {
-            System.out.print("Предмет [" + (i+1) + "] - ");
-            sub_name[i] = text.nextLine();
-        }
+        sub_name = name(count);
 
         System.out.println("Введите оценки и кредиты [Предмет - 100 3]: ");
         for (int i = 0; i < count; i++) {
@@ -62,4 +57,14 @@ public class Main {
         float result = (mult/count_cr) * 0.9f + (gas*0.1f);
         System.out.print("Средняя оценка: " + result);
     }
+
+        public static String[] name(int n) { // метод ввода предметов
+        Scanner text = new Scanner(System.in);
+        String[] name_sub = new String[n];
+        for (int i = 0; i < n; i++) {
+            System.out.print("Предмет [" + (i+1) + "] - ");
+            name_sub[i] = text.nextLine();
+        }
+            return name_sub;
+        }
 }
