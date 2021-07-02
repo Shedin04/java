@@ -55,8 +55,7 @@ public class Main {
             System.out.format(s[i].sub_name + " | " + s[i].sub_rate + " | " + s[i].sub_cr + "\n");
         }
         System.out.println("ГАС: " + gas);
-
-
+        
         int[] sub_mult = new int[count];
         float count_cr = 0;
         float mult = 0;
