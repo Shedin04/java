@@ -1,4 +1,4 @@
-package com.company; //что-то типа библиотек в си++
+package com.company;
 import java.util.Scanner;
 
 public class Main {
