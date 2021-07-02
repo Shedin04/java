@@ -30,7 +30,7 @@ public class Main {
                 rate = input.nextInt();
                 cred = input.nextInt();
                 if (rate<=100 && rate>=0 && cred>=1)
-                break;
+                    break;
                 else {
                     System.out.print("Ошибка, введите другие значения: ");
                 }
@@ -41,21 +41,16 @@ public class Main {
         System.out.print("- Есть доп. баллы? [0-нет; 1-есть]: ");
         int gas = 0;
         int dop = input.nextInt();
-        switch (dop) {
-            case 1:
-                while (true) {
-                    System.out.print("- Введите к-во [1-40]: ");
-                    gas = input.nextInt();
-                    if (gas <= 40 && gas > 0)
-                    break;
-                }
-                break;
-            default:
+        if (dop == 1) {
+            do {
+                System.out.print("- Введите к-во [1-40]: ");
+                gas = input.nextInt();
+            } while (gas > 40 || gas <= 0);
         }
         gas += 60;
 
         if (count>=1)
-        System.out.println("\n" + "Предмет-" + "Оценка-" + "Кредиты");
+            System.out.println("\n" + "Предмет-" + "Оценка-" + "Кредиты");
         for (int i=0; i<count; i++) {
             System.out.format(s[i].sub_name + " | " + s[i].sub_rate + " | " + s[i].sub_cr + "\n");
         }
